@@ -1,6 +1,7 @@
 type Point = { x: number; y: number };
+export type Line = { a: Point; b: Point };
 
-const start: Point = { x: 0, y: 0 };
+const start: Point = { x: 40, y: -40 };
 
 function calcDistance(a: Point, b: Point): number {
   return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
@@ -8,6 +9,10 @@ function calcDistance(a: Point, b: Point): number {
 
 function toRads(degrees: number) {
   return degrees * (Math.PI / 180);
+}
+
+function addPoints(a: Point, b: Point): Point {
+  return { x: a.x + b.x, y: a.y + b.y };
 }
 
 function spericalToCart(distance: number, directionDeg: number): Point {
@@ -27,7 +32,7 @@ export type GameState = {
 };
 
 export function newGoal(): Point {
-  return { x: 20, y: 30 };
+  return addPoints({ x: 20, y: 30 }, start);
 }
 
 export class Game {
@@ -103,6 +108,15 @@ export class Game {
 
   shortestDistance() {
     return calcDistance(this.startPosition(), this.goal);
+  }
+
+  getLines(): Line[] {
+    const lines: Line[] = [];
+    const len = this.path.length;
+    for (let i = 0; i < len - 1; i++) {
+      lines.push({ a: this.path[i], b: this.path[i + 1] });
+    }
+    return lines;
   }
 
   state(): GameState {
