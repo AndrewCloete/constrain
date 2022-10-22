@@ -1,8 +1,8 @@
-import { Terrain } from "./game"
+import { Game } from "./game"
 
 describe("Game", ()=> {
     it("Basic", ()=> {
-        const terrain = new Terrain({x: 10, y:-20})
+        const terrain = new Game({x: 10, y:-20})
         expect(terrain.travelDistance()).toBe(0)
         terrain.step(3, 45)
         expect(terrain.travelDistance()).toBe(3)
@@ -11,7 +11,7 @@ describe("Game", ()=> {
         expect(terrain.vectorDistanceFromStart()).toBe(0)
     })
     it("3-4-5", ()=> {
-        const terrain = new Terrain({x: 10, y:-20})
+        const terrain = new Game({x: 10, y:-20})
         expect(terrain.travelDistance()).toBe(0)
         terrain.step(3, 0)
         expect(terrain.travelDistance()).toBe(3)

@@ -17,19 +17,19 @@ function spericalToCart(distance: number, directionDeg: number): Point {
   return { x, y };
 }
 
-export class Terrain {
+export class Game {
   private goal: Point;
   private threshold: number;
   private path: Point[];
 
   constructor(goal: Point) {
     this.goal = goal;
-    this.threshold = 0.1;
+    this.threshold = 0.95;
     this.path = [start];
   }
 
   startPosition() {
-    return this.path[0]
+    return this.path[0];
   }
 
   currentPosition() {
@@ -60,7 +60,24 @@ export class Terrain {
   }
 
   vectorDistanceFromStart() {
-    return calcDistance(this.startPosition(), this.currentPosition())
+    return calcDistance(this.startPosition(), this.currentPosition());
+  }
+  vectorDistanceToGoal() {
+    return calcDistance(this.currentPosition(), this.goal);
+  }
+
+  efficiency() {
+    return this.shortestDistance() - this.travelDistance();
+  }
+
+  complete()  {
+    return this.temperature() >= this.threshold
+  }
+
+  temperature() {
+    const shortest = this.shortestDistance();
+    const diff = this.vectorDistanceToGoal();
+    return (shortest - diff) / shortest;
   }
 
   shortestDistance() {
