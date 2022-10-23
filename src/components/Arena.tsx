@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Game, GameState, newGoal, Line, Point } from "../models/game/game";
 import styles from "./Arena.module.css";
+import circular from "./circular.png";
 
 import { TextField, Button } from "@mui/material";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
@@ -15,11 +16,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import Divider from "@mui/material/Divider";
-import { PlaylistRemove } from "@mui/icons-material";
 
 function State(props: { player: GameState }) {
   return (
@@ -167,6 +165,7 @@ export function Arena() {
     <div className={styles.root}>
       <div className={styles.game}>
         <div className={styles.formRoot}>
+          <img className={styles.form} src={circular} alt="guide" />
           <div className={styles.form}>
             <TextField
               id="outlined-basic"
@@ -174,6 +173,7 @@ export function Arena() {
               variant="outlined"
               value={distance}
               onChange={onDistanceInput}
+              fullWidth={true}
             />
           </div>
           <div className={styles.form}>
@@ -183,6 +183,7 @@ export function Arena() {
               variant="outlined"
               value={directionDeg}
               onChange={onDirectionInput}
+              fullWidth={true}
             />
           </div>
           <div className={styles.form}>
@@ -217,29 +218,29 @@ export function Arena() {
               Cheat!
             </Button>
           </div>
-          <State player={player} />
+          <div className={styles.statBox}>
+            <State player={player} />
+          </div>
+          <Divider />
           <div>
-            <div className={styles.form}>
-              <div> Temperature</div>
-              <div className={styles.stat}>
-                {(player.temperature * 100).toFixed()}%
+            <div className={styles.score}>
+              <div className={styles.scoreText}> Temperature</div>
+              <div>
+                <span className={styles.stat}>
+                  {(player.temperature * 100).toFixed()}%
+                </span>
               </div>
             </div>
             {player.complete && (
-              <div>
-                <div>Score</div>
+              <div className={styles.score}>
+                <div className={styles.scoreText}>Score</div>
                 <div>
-                  <SportsScoreIcon fontSize="large" />
                   <span className={styles.stat}>
                     {(player.efficiency * 100).toFixed()}%
                   </span>
                 </div>
               </div>
             )}
-            {/* <div> Complete </div>
-            <div className={styles.stat}>
-              {player.complete ? "Done" : "Keep going"}
-            </div> */}
           </div>
         </div>
 
