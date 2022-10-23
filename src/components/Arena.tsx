@@ -10,6 +10,63 @@ import SportsScoreIcon from "@mui/icons-material/SportsScore";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import CrisisAlertIcon from "@mui/icons-material/CrisisAlert";
 
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ImageIcon from "@mui/icons-material/Image";
+import WorkIcon from "@mui/icons-material/Work";
+import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import Divider from "@mui/material/Divider";
+import { PlaylistRemove } from "@mui/icons-material";
+
+function State(props: { player: GameState }) {
+  return (
+    <List
+      sx={{
+        width: "100%",
+        maxWidth: 360,
+        bgcolor: "background.paper",
+      }}
+    >
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <DirectionsWalkIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={props.player.steps.toFixed()}
+          secondary="Steps"
+        />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <RouteIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={props.player.traveled.toFixed() + "m"}
+          secondary="Traveled"
+        />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <HomeIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={props.player.fromHome.toFixed() + "m"}
+          secondary="From home"
+        />
+      </ListItem>
+    </List>
+  );
+}
+
 function lineToSvgLine(line: Line, id: string) {
   var newLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
   newLine.setAttribute("id", id);
@@ -73,6 +130,13 @@ export function Arena() {
   const [player, setPlayer] = useState<GameState>(game.state());
   const svg = useRef(renderSvg(game, showGoal));
 
+  function invalidInput(): boolean {
+    if (distance == "" || directionDeg == "") {
+      return true;
+    }
+    return isNaN(+distance) || isNaN(+directionDeg);
+  }
+
   function reset() {
     const newGame = new Game(newGoal());
     setPlayer(newGame.state());
@@ -115,7 +179,7 @@ export function Arena() {
           <div className={styles.form}>
             <TextField
               id="outlined-basic"
-              label="Direction"
+              label="Direction (deg)"
               variant="outlined"
               value={directionDeg}
               onChange={onDirectionInput}
@@ -125,6 +189,8 @@ export function Arena() {
             <Button
               variant="contained"
               onClick={step}
+              fullWidth={true}
+              disabled={invalidInput()}
               startIcon={<DirectionsWalkIcon />}
             >
               Step
@@ -134,6 +200,7 @@ export function Arena() {
             <Button
               variant="outlined"
               onClick={reset}
+              fullWidth={true}
               startIcon={<AutorenewIcon />}
             >
               Reset
@@ -144,32 +211,15 @@ export function Arena() {
               variant={showGoal ? "contained" : "outlined"}
               onClick={cheat}
               color="warning"
+              fullWidth={true}
               startIcon={<CrisisAlertIcon />}
             >
               Cheat!
             </Button>
           </div>
+          <State player={player} />
           <div>
-            <div>Steps</div>
-            <div>
-              <DirectionsWalkIcon fontSize="large" />
-              <span className={styles.stat}>{player.steps}</span>
-            </div>
-            <div> Traveled</div>
-            <div>
-              <RouteIcon fontSize="large" />
-              <span className={styles.stat}>
-                {player.traveled.toFixed(0)}m{" "}
-              </span>
-            </div>
-            <div> From home</div>
-            <div>
-              <HomeIcon fontSize="large" />
-              <span className={styles.stat}>
-                {player.fromHome.toFixed(0)}m{" "}
-              </span>
-            </div>
-            <div>
+            <div className={styles.form}>
               <div> Temperature</div>
               <div className={styles.stat}>
                 {(player.temperature * 100).toFixed()}%
