@@ -1,7 +1,9 @@
-type Point = { x: number; y: number };
+export type Point = { x: number; y: number };
 export type Line = { a: Point; b: Point };
 
-const start: Point = { x: 40, y: -40 };
+const RADIUS = 50;
+
+const start: Point = { x: RADIUS, y: -RADIUS };
 
 function calcDistance(a: Point, b: Point): number {
   return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
@@ -31,8 +33,14 @@ export type GameState = {
   complete: boolean;
 };
 
+export function randomPoint(): Point {
+  const x = Math.random() * RADIUS * 2 - RADIUS;
+  const y = Math.random() * RADIUS * 2 - RADIUS;
+  return { x, y };
+}
+
 export function newGoal(): Point {
-  return addPoints({ x: 20, y: 30 }, start);
+  return addPoints(randomPoint(), start);
 }
 
 export class Game {
@@ -52,6 +60,10 @@ export class Game {
 
   currentPosition() {
     return this.path[this.path.length - 1];
+  }
+
+  goalPosition() {
+    return this.goal;
   }
 
   step(distance: number, directionDeg: number) {

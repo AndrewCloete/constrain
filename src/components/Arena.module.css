@@ -3,6 +3,40 @@
     margin: 10px;
 }
 
+.game {
+    display: flex;
+}
+
+.formRoot {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: antiquewhite; */
+    padding: 10px;
+}
+
 .form {
-    margin: 10px
+    margin: 10px;
+}
+
+.btn {
+    margin: 10px;
+}
+
+.map {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: black;
+    background-color: lightgrey;
+    max-height: 100vh;
+}
+
+.cheat {
+    margin: 10px;
+    background-color: lightcoral;
+}
+
+.stat {
+    font-size: 2.5rem;
 }
