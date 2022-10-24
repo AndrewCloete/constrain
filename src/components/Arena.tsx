@@ -120,6 +120,38 @@ function State(props: { player: GameState }) {
   );
 }
 
+type UserInput = { value: string; onInput: (event: any) => void };
+
+type GameInput = { distance: UserInput; direction: UserInput };
+
+function Input1(props: { input: GameInput }) {
+  return (
+    <div>
+      <img className={styles.form} src={circular} alt="guide" />
+      <div className={styles.form}>
+        <TextField
+          id="outlined-basic"
+          label="Distance"
+          variant="outlined"
+          value={props.input.distance.value}
+          onChange={props.input.distance.onInput}
+          fullWidth={true}
+        />
+      </div>
+      <div className={styles.form}>
+        <TextField
+          id="outlined-basic"
+          label="Direction (deg)"
+          variant="outlined"
+          value={props.input.direction.value}
+          onChange={props.input.direction.onInput}
+          fullWidth={true}
+        />
+      </div>
+    </div>
+  );
+}
+
 export function Arena() {
   const [distance, setDistance] = useState<string>("");
   const [directionDeg, setDirectionDeg] = useState<string>("");
@@ -165,27 +197,12 @@ export function Arena() {
     <div className={styles.root}>
       <div className={styles.game}>
         <div className={styles.formRoot}>
-          <img className={styles.form} src={circular} alt="guide" />
-          <div className={styles.form}>
-            <TextField
-              id="outlined-basic"
-              label="Distance"
-              variant="outlined"
-              value={distance}
-              onChange={onDistanceInput}
-              fullWidth={true}
-            />
-          </div>
-          <div className={styles.form}>
-            <TextField
-              id="outlined-basic"
-              label="Direction (deg)"
-              variant="outlined"
-              value={directionDeg}
-              onChange={onDirectionInput}
-              fullWidth={true}
-            />
-          </div>
+          <Input1
+            input={{
+              distance: { value: distance, onInput: onDistanceInput },
+              direction: { value: directionDeg, onInput: onDirectionInput },
+            }}
+          />
           <div className={styles.form}>
             <Button
               variant="contained"

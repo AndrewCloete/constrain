@@ -8,7 +8,7 @@
 }
 
 .formRoot {
-  width: 20%;
+  width: 450px;
   display: flex;
   flex-direction: column;
   /* background-color: antiquewhite; */
@@ -29,7 +29,7 @@
   border-radius: 20px;
   border-color: black;
   background-color: lightgrey;
-  max-height: 100vh;
+  max-height: 95vh;
 }
 
 .cheat {
