@@ -19,52 +19,6 @@ import Avatar from "@mui/material/Avatar";
 import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import Divider from "@mui/material/Divider";
 
-function State(props: { player: GameState }) {
-  return (
-    <List
-      sx={{
-        width: "100%",
-        maxWidth: 360,
-        bgcolor: "background.paper",
-      }}
-    >
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <DirectionsWalkIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary={props.player.steps.toFixed()}
-          secondary="Steps"
-        />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <RouteIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary={props.player.traveled.toFixed() + "m"}
-          secondary="Traveled"
-        />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <HomeIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary={props.player.fromHome.toFixed() + "m"}
-          secondary="From home"
-        />
-      </ListItem>
-    </List>
-  );
-}
-
 function lineToSvgLine(line: Line, id: string) {
   var newLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
   newLine.setAttribute("id", id);
@@ -118,6 +72,52 @@ function renderSvg(game: Game, showGoal: boolean): SVGSVGElement {
   }
 
   return svg;
+}
+
+function State(props: { player: GameState }) {
+  return (
+    <List
+      sx={{
+        width: "100%",
+        maxWidth: 360,
+        bgcolor: "background.paper",
+      }}
+    >
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <DirectionsWalkIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={props.player.steps.toFixed()}
+          secondary="Steps"
+        />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <RouteIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={props.player.traveled.toFixed() + "m"}
+          secondary="Traveled"
+        />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <HomeIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={props.player.fromHome.toFixed() + "m"}
+          secondary="From home"
+        />
+      </ListItem>
+    </List>
+  );
 }
 
 export function Arena() {
