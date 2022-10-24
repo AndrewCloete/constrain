@@ -295,7 +295,7 @@ export function Arena() {
             <State player={player} />
           </div>
           <Divider />
-          <div>
+          <div style={{ display: "flex" }}>
             <div className={styles.score}>
               <div className={styles.scoreText}> TEMPERATURE</div>
               <div>
