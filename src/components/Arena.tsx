@@ -10,6 +10,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import SportsScoreIcon from "@mui/icons-material/SportsScore";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import CrisisAlertIcon from "@mui/icons-material/CrisisAlert";
+import Slider from "@mui/material/Slider";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -18,6 +19,8 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import Divider from "@mui/material/Divider";
+
+import CircularSlider from "@fseehawer/react-circular-slider";
 
 function lineToSvgLine(line: Line, id: string) {
   var newLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
@@ -131,16 +134,6 @@ function Input1(props: { input: GameInput }) {
       <div className={styles.form}>
         <TextField
           id="outlined-basic"
-          label="Distance"
-          variant="outlined"
-          value={props.input.distance.value}
-          onChange={props.input.distance.onInput}
-          fullWidth={true}
-        />
-      </div>
-      <div className={styles.form}>
-        <TextField
-          id="outlined-basic"
           label="Direction (deg)"
           variant="outlined"
           value={props.input.direction.value}
@@ -148,13 +141,66 @@ function Input1(props: { input: GameInput }) {
           fullWidth={true}
         />
       </div>
+      <div className={styles.form}>
+        <TextField
+          id="outlined-basic"
+          label="Distance"
+          variant="outlined"
+          value={props.input.distance.value}
+          onChange={props.input.distance.onInput}
+          fullWidth={true}
+        />
+      </div>
     </div>
   );
 }
 
+function Input2(props: { input: GameInput }) {
+  return (
+    <div className={styles.input}>
+      <CircularSlider
+        min={0}
+        max={360}
+        direction={-1}
+        knobPosition="right"
+        appendToValue="°"
+        valueFontSize="4rem"
+        trackColor="#eeeeee"
+        progressColorFrom={"#00bfbd"}
+        progressColorTo={"#009c9a"}
+        labelColor={"#00bfbd"}
+        knobColor={"#00bfbd"}
+        // value={props.input.direction.value}
+        onChange={props.input.direction.onInput}
+      />
+
+      <div className={styles.form}>
+        Distance: {props.input.distance.value}
+        <Slider
+          aria-label="Volume"
+          value={+props.input.distance.value}
+          onChange={props.input.distance.onInput}
+          min={1}
+          max={20}
+        />
+      </div>
+    </div>
+  );
+}
+
+function parseEvent(event: any): string {
+  if (event.target) {
+    return event.target.value;
+  }
+  return "" + event;
+}
+
+const START_DISTANCE = "5";
+const START_DIRECTION = "0";
+
 export function Arena() {
-  const [distance, setDistance] = useState<string>("");
-  const [directionDeg, setDirectionDeg] = useState<string>("");
+  const [distance, setDistance] = useState<string>(START_DISTANCE);
+  const [directionDeg, setDirectionDeg] = useState<string>(START_DIRECTION);
   const [showGoal, setShowGoal] = useState<boolean>(false);
   const [game, setGame] = useState<Game>(new Game(newGoal()));
   const [player, setPlayer] = useState<GameState>(game.state());
@@ -171,15 +217,15 @@ export function Arena() {
     const newGame = new Game(newGoal());
     setPlayer(newGame.state());
     setGame(newGame);
-    setDistance("");
-    setDirectionDeg("");
+    setDistance(START_DISTANCE);
+    setDirectionDeg(START_DIRECTION);
   }
 
   function onDistanceInput(event: any) {
-    setDistance(event.target.value);
+    setDistance(parseEvent(event));
   }
   function onDirectionInput(event: any) {
-    setDirectionDeg(event.target.value);
+    setDirectionDeg(parseEvent(event));
   }
   function cheat() {
     setShowGoal(!showGoal);
@@ -189,7 +235,6 @@ export function Arena() {
     game.step(parseFloat(distance), parseFloat(directionDeg));
     setPlayer(game.state());
     svg.current = renderSvg(game, showGoal);
-    console.log(svg);
     setGame(game);
   }
 
@@ -197,7 +242,7 @@ export function Arena() {
     <div className={styles.root}>
       <div className={styles.game}>
         <div className={styles.formRoot}>
-          <Input1
+          <Input2
             input={{
               distance: { value: distance, onInput: onDistanceInput },
               direction: { value: directionDeg, onInput: onDirectionInput },

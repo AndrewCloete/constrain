@@ -1,6 +1,7 @@
 export type Point = { x: number; y: number };
 export type Line = { a: Point; b: Point };
 
+const MININUM_RADIUS = 15;
 const RADIUS = 50;
 
 const start: Point = { x: RADIUS, y: -RADIUS };
@@ -34,9 +35,19 @@ export type GameState = {
 };
 
 export function randomPoint(): Point {
-  const x = Math.random() * RADIUS * 2 - RADIUS;
-  const y = Math.random() * RADIUS * 2 - RADIUS;
-  return { x, y };
+  function randomInterval(min: number, max: number): number {
+    return Math.random() * (max - min) + min;
+  }
+  function randomSign(): number {
+    return Math.random() - 0.5 > 0 ? 1 : -1;
+  }
+  const randR = randomInterval(MININUM_RADIUS, RADIUS);
+  const randX = randomInterval(-randR, randR);
+  const calcY = Math.sqrt(randR ** 2 - randX ** 2) * randomSign();
+  const point = { x: randX, y: calcY };
+  console.log(point);
+  console.log(Math.sqrt(randX ** 2 + calcY ** 2), randR);
+  return point;
 }
 
 export function newGoal(): Point {
@@ -50,7 +61,7 @@ export class Game {
 
   constructor(goal: Point) {
     this.goal = goal;
-    this.threshold = 0.95;
+    this.threshold = 2;
     this.path = [start];
   }
 
@@ -101,15 +112,16 @@ export class Game {
   }
 
   efficiency(): number {
-    const travel = this.travelDistance();
+    // Add threshold to travel since the player gets it for "free"
+    const travel = this.travelDistance() + 2;
     if (travel > 0) {
-      return this.shortestDistance() / this.travelDistance();
+      return this.shortestDistance() / travel;
     }
     return 0;
   }
 
   complete() {
-    return this.temperature() >= this.threshold;
+    return this.vectorDistanceToGoal() < this.threshold;
   }
 
   temperature() {

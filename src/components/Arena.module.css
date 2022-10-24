@@ -5,18 +5,25 @@
 
 .game {
   display: flex;
+  justify-content: center;
 }
 
 .formRoot {
   width: 450px;
   display: flex;
   flex-direction: column;
-  /* background-color: antiquewhite; */
   padding: 10px;
 }
 
 .form {
   margin: 10px;
+  width: 90%;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .btn {
