@@ -62,7 +62,7 @@ export class Game {
 
   constructor(goal: Point) {
     this.goal = goal;
-    this.threshold = 2;
+    this.threshold = 1;
     this.path = [start];
   }
 

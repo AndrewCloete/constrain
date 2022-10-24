@@ -69,7 +69,7 @@ function renderSvg(game: Game, showGoal: boolean): SVGSVGElement {
   });
   const startSvg = pointToSvgCircle(game.startPosition(), "start", "green");
   svg.append(startSvg);
-  if (showGoal) {
+  if (showGoal || game.complete()) {
     const goalSvg = pointToSvgCircle(game.goalPosition(), "goal", "goldenrod");
     svg.append(goalSvg);
   }
@@ -180,7 +180,7 @@ function Input2(props: { input: GameInput }) {
           value={+props.input.distance.value}
           onChange={props.input.distance.onInput}
           min={1}
-          max={20}
+          max={10}
         />
         <div
           style={{
