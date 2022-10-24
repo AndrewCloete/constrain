@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Game, GameState, newGoal, Line, Point } from "../models/game/game";
 import styles from "./Arena.module.css";
 import circular from "./circular.png";
@@ -166,16 +166,15 @@ function Input2(props: { input: GameInput }) {
         appendToValue="°"
         valueFontSize="4rem"
         trackColor="#eeeeee"
-        progressColorFrom={"#00bfbd"}
-        progressColorTo={"#009c9a"}
-        labelColor={"#00bfbd"}
-        knobColor={"#00bfbd"}
-        // value={props.input.direction.value}
+        progressColorFrom={"#176dc8"}
+        progressColorTo={"#176dc8"}
+        labelColor={"#176dc8"}
+        knobColor={"#176dc8"}
         onChange={props.input.direction.onInput}
       />
 
       <div className={styles.form}>
-        Distance: {props.input.distance.value}
+        <div style={{ color: "#176dc8", marginBottom: "5px" }}>DISTANCE</div>
         <Slider
           aria-label="Volume"
           value={+props.input.distance.value}
@@ -183,6 +182,17 @@ function Input2(props: { input: GameInput }) {
           min={1}
           max={20}
         />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <div style={{ color: "#176dc8", fontSize: "4rem" }}>
+            {props.input.distance.value}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -256,7 +266,7 @@ export function Arena() {
               disabled={invalidInput()}
               startIcon={<DirectionsWalkIcon />}
             >
-              Step
+              Walk
             </Button>
           </div>
           <div className={styles.form}>
@@ -280,22 +290,26 @@ export function Arena() {
               Cheat!
             </Button>
           </div>
+          <Divider />
           <div className={styles.statBox}>
             <State player={player} />
           </div>
           <Divider />
           <div>
             <div className={styles.score}>
-              <div className={styles.scoreText}> Temperature</div>
+              <div className={styles.scoreText}> TEMPERATURE</div>
               <div>
-                <span className={styles.stat}>
+                <span className={styles.stat} style={{ color: "#176dc8" }}>
                   {(player.temperature * 100).toFixed()}%
                 </span>
               </div>
             </div>
             {player.complete && (
-              <div className={styles.score}>
-                <div className={styles.scoreText}>Score</div>
+              <div
+                className={styles.score}
+                style={{ color: "rgba(237, 108, 2)" }}
+              >
+                <div className={styles.scoreText}>SCORE</div>
                 <div>
                   <span className={styles.stat}>
                     {(player.efficiency * 100).toFixed()}%

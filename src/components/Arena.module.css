@@ -31,10 +31,10 @@
 }
 
 .map {
-  border-width: 1px;
+  border-width: 5px;
   border-style: solid;
   border-radius: 20px;
-  border-color: black;
+  border-color: rgb(142, 142, 142);
   background-color: lightgrey;
   max-height: 95vh;
 }
@@ -52,13 +52,13 @@
 }
 
 .stat {
-  font-size: 3rem;
+  font-size: 4rem;
 }
 
 .scoreText {
   color: rgb(120, 120, 120);
   margin-bottom: 5px;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .score {

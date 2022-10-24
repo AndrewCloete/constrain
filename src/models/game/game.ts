@@ -41,12 +41,13 @@ export function randomPoint(): Point {
   function randomSign(): number {
     return Math.random() - 0.5 > 0 ? 1 : -1;
   }
+  // Set a random radius
   const randR = randomInterval(MININUM_RADIUS, RADIUS);
+  // Set a random X in that radius
   const randX = randomInterval(-randR, randR);
+  // Select one of the Y values that intersect the X and radius
   const calcY = Math.sqrt(randR ** 2 - randX ** 2) * randomSign();
   const point = { x: randX, y: calcY };
-  console.log(point);
-  console.log(Math.sqrt(randX ** 2 + calcY ** 2), randR);
   return point;
 }
 
