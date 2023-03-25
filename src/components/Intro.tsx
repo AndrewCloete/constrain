@@ -15,17 +15,21 @@ export function Intro(props: {
             <i>"How long will it take?"</i>
           </h1>
           <p>
-            This silly little "game" was hacked together for a presentation to
-            illustrate intuitively the reasoning behind{" "}
-            <a href="https://agilemanifesto.org/">Agile</a> software development
-            practices meant to address the dreaded question above.
+            To help explain my feelings regarding this question, I hacked
+            together this silly little "game" for a presentation. My aim was to
+            leave my audience with a more tangible mental model behind the
+            motivation for <a href="https://agilemanifesto.org/">Agile</a>{" "}
+            software development principles.
           </p>
           <p>
             Your challenge is to find a hidden goal in the shortest amount of
             distance traveled. Use the "temperature gauge" to guide you.
           </p>
           <p>
-            (Note. You will have a bad time on <b>mobile</b>)
+            <i>
+              Note. This game is designed for <b>desktop use only</b>. You will
+              have a bad time on mobile.
+            </i>
           </p>
           <div className="flex flex-col items-center">
             <div className="w-full sm:w-1/2 m-2">
@@ -52,7 +56,7 @@ export function Intro(props: {
           {props.hintOpen && (
             <>
               <p>OK, but you probably will forget this advice...</p>
-              <h3>Number of steps does not matter</h3>
+              <h3>The number of steps does not matter</h3>
               <p>
                 You are only judged by the <b>distance</b> traveled, not the
                 number of steps taken. The most efficient path is to set the
@@ -74,7 +78,7 @@ export function Intro(props: {
                 take small steps, quickly, all the time.
               </p>
 
-              <h3>Lessons from analogy the</h3>
+              <h3>Takeaways</h3>
               <ul>
                 <li>
                   Playing is not possible without real-time, concrete{" "}
@@ -89,7 +93,7 @@ export function Intro(props: {
                 </li>
               </ul>
               <p>
-                In a future version of the game I also want add a variable
+                In a future version of the game, I also want add a variable
                 timeout between steps to show how this naturally leads you to
                 wanting to take larger steps.
               </p>
@@ -142,7 +146,7 @@ export function Intro(props: {
             <a href="https://github.com/AndrewCloete/constrain">
               Andrew Cloete
             </a>
-            . Feel free to use.
+            . Feel free to share.
           </i>
         </article>
       </div>

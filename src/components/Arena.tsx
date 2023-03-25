@@ -169,6 +169,7 @@ function Input2(props: { input: GameInput }) {
         labelColor={"#176dc8"}
         knobColor={"#176dc8"}
         onChange={props.input.direction.onInput}
+        label="DIRECTION"
       />
 
       <div className={styles.form}>
