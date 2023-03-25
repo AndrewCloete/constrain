@@ -139,9 +139,20 @@ export function Intro(props: {
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.amazon.com/Competing-Against-Luck-Innovation-Customer/dp/0062435612">
-                    Competing Against Luck, by Clayton Christensen
-                  </a>
+                  <a href="https://www.goodreads.com/book/show/28820024-competing-against-luck">
+                    Competing Against Luck
+                  </a>{" "}
+                  by Clayton M. Christensen
+                </li>
+                <li>
+                  <a href="https://www.goodreads.com/vi/book/show/11721966-good-strategy-bad-strategy">
+                    Good Strategy / Bad Strategy
+                  </a>{" "}
+                  and{" "}
+                  <a href="https://www.goodreads.com/book/show/58895961-the-crux">
+                    The Crux
+                  </a>{" "}
+                  by Richard P. Rumelt
                 </li>
               </ul>
             </>
