@@ -89,7 +89,8 @@ export function Intro(props: {
                 <li>
                   Do whatever to keep your SDLC as short as possible. This will
                   motivate you to take smaller and smaller steps, more
-                  frequently.
+                  frequently. Aiming for a minimum of 10 production deploys a
+                  day is a good start.
                 </li>
               </ul>
               <p>
@@ -130,6 +131,11 @@ export function Intro(props: {
                 <li>
                   <a href="https://www.youtube.com/watch?v=ln4WnxX-wrw">
                     TDD Is The Best Design Technique
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.youtube.com/watch?v=v21jg8wb1eU">
+                    How To Estimate Software Development Time
                   </a>
                 </li>
                 <li>
