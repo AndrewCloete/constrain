@@ -22,8 +22,8 @@ export function Intro(props: {
             software development principles.
           </p>
           <p>
-            Your challenge is to find a hidden goal in the shortest amount of
-            distance traveled. Use the "temperature gauge" to guide you.
+            Your challenge is to find a hidden goal in the shortest distance
+            traveled. Use the "temperature gauge" to guide you.
           </p>
           <p>
             <i>
