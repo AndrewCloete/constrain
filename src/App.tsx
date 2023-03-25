@@ -9,7 +9,7 @@ import { Intro } from "./components/Intro";
 
 function App() {
   const [modalOpen, setIntroOpen] = useState(true);
-  const [hint, setHint] = useState(true);
+  const [hint, setHint] = useState(false);
 
   function hintClick() {
     setHint(!hint);
