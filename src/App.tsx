@@ -1,11 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
-import {Arena} from "./components/Arena"
+import { useState } from "react";
+
+import { Arena } from "./components/Arena";
+import { Intro } from "./components/Intro";
 
 function App() {
-  return <Arena/>
+  const [modalOpen, setIntroOpen] = useState(true);
+  const [hint, setHint] = useState(true);
+
+  function hintClick() {
+    setHint(!hint);
+  }
+
+  return (
+    <>
+      {modalOpen && (
+        <Intro
+          hintOpen={hint}
+          play={() => setIntroOpen(false)}
+          hintClick={hintClick}
+        />
+      )}
+      {!modalOpen && (
+        <Arena
+          back={() => {
+            setIntroOpen(true);
+            setHint(true);
+          }}
+        />
+      )}
+    </>
+  );
 }
 
 export default App;

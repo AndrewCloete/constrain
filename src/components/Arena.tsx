@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Game, GameState, newGoal, Line, Point } from "../models/game/game";
 import styles from "./Arena.module.css";
 import circular from "./circular.png";
@@ -7,7 +7,6 @@ import { TextField, Button } from "@mui/material";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import RouteIcon from "@mui/icons-material/Route";
 import HomeIcon from "@mui/icons-material/Home";
-import SportsScoreIcon from "@mui/icons-material/SportsScore";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import CrisisAlertIcon from "@mui/icons-material/CrisisAlert";
 import Slider from "@mui/material/Slider";
@@ -17,7 +16,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import Divider from "@mui/material/Divider";
 
 import CircularSlider from "@fseehawer/react-circular-slider";
@@ -164,7 +162,7 @@ function Input2(props: { input: GameInput }) {
         direction={-1}
         knobPosition="right"
         appendToValue="°"
-        valueFontSize="4rem"
+        valueFontSize="2rem"
         trackColor="#eeeeee"
         progressColorFrom={"#176dc8"}
         progressColorTo={"#176dc8"}
@@ -189,7 +187,7 @@ function Input2(props: { input: GameInput }) {
             marginBottom: "20px",
           }}
         >
-          <div style={{ color: "#176dc8", fontSize: "4rem" }}>
+          <div style={{ color: "#176dc8", fontSize: "2rem" }}>
             {props.input.distance.value}
           </div>
         </div>
@@ -208,7 +206,7 @@ function parseEvent(event: any): string {
 const START_DISTANCE = "5";
 const START_DIRECTION = "0";
 
-export function Arena() {
+export function Arena(props: { back: () => void }) {
   const [distance, setDistance] = useState<string>(START_DISTANCE);
   const [directionDeg, setDirectionDeg] = useState<string>(START_DIRECTION);
   const [showGoal, setShowGoal] = useState<boolean>(false);
@@ -317,6 +315,11 @@ export function Arena() {
                 </div>
               </div>
             )}
+          </div>
+          <div className={styles.form}>
+            <Button variant="contained" onClick={props.back} fullWidth={true}>
+              Why?
+            </Button>
           </div>
         </div>
 

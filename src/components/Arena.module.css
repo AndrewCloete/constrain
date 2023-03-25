@@ -9,7 +9,8 @@
 }
 
 .formRoot {
-  width: 450px;
+  max-width: 20vw;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -52,7 +53,7 @@
 }
 
 .stat {
-  font-size: 4rem;
+  font-size: 2rem;
 }
 
 .scoreText {

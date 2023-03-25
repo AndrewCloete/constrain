@@ -1,0 +1,14 @@
+.root {
+  padding: 10px;
+  margin: 10px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  margin: 10px;
+  width: 90%;
+}
