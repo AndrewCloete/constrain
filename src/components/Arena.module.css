@@ -9,7 +9,6 @@
 }
 
 .formRoot {
-  max-width: 20vw;
   max-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -29,6 +28,11 @@
 
 .btn {
   margin: 10px;
+}
+
+.mapdiv {
+  min-height: 95vh;
+  aspect-ratio: 1;
 }
 
 .map {

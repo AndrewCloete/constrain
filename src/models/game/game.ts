@@ -80,9 +80,16 @@ export class Game {
 
   step(distance: number, directionDeg: number) {
     const move = spericalToCart(distance, directionDeg);
+    this.stepDelta(move.x, move.y)
+  }
+
+  stepDelta(deltaX: number, deltaY: number) {
     const current = this.currentPosition();
-    const newPoint = { x: current.x + move.x, y: current.y + move.y };
+    const newPoint = { x: current.x + deltaX, y: current.y + deltaY };
     this.path.push(newPoint);
+  }
+  stepAbs(x: number, y: number) {
+    this.path.push({x, y});
   }
 
   travelDistance() {

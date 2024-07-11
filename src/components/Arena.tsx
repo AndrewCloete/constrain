@@ -37,7 +37,7 @@ function lineToSvgLine(line: Line, id: string) {
 function pointToSvgCircle(point: Point, id: string, fill: string) {
   var svgPoint = document.createElementNS(
     "http://www.w3.org/2000/svg",
-    "circle"
+    "circle",
   );
   svgPoint.setAttribute("id", id);
   svgPoint.setAttribute("cx", "" + point.x);
@@ -156,7 +156,7 @@ function Input1(props: { input: GameInput }) {
 function Input2(props: { input: GameInput }) {
   return (
     <div className={styles.input}>
-      <CircularSlider
+      {/* <CircularSlider
         min={0}
         max={360}
         direction={-1}
@@ -170,7 +170,7 @@ function Input2(props: { input: GameInput }) {
         knobColor={"#176dc8"}
         onChange={props.input.direction.onInput}
         label="DIRECTION"
-      />
+      /> */}
 
       <div className={styles.form}>
         <div style={{ color: "#176dc8", marginBottom: "5px" }}>DISTANCE</div>
@@ -247,18 +247,36 @@ export function Arena(props: { back: () => void }) {
     setGame(game);
   }
 
+  const divRef = useRef<HTMLDivElement>(null);
+
+  const handleClick = (event: any) => {
+    if (!divRef.current) return;
+
+    const rect = divRef.current.getBoundingClientRect();
+    const calibrationX = 100/rect.width
+    const calibrationY = 100/rect.height
+
+    const clickX = ((event.clientX - rect.left)) * calibrationX;
+    const clickY = -((event.clientY - rect.top)) * calibrationY;
+
+    game.stepAbs(clickX, clickY)
+    setPlayer(game.state());
+    svg.current = renderSvg(game, showGoal);
+    setGame(game);
+  };
+
   return (
     <div className={styles.root}>
       <div className={styles.game}>
         <div className={styles.formRoot}>
-          <Input2
+          {/* <Input2
             input={{
               distance: { value: distance, onInput: onDistanceInput },
               direction: { value: directionDeg, onInput: onDirectionInput },
             }}
-          />
+          /> */}
           <div className={styles.form}>
-            <Button
+            {/* <Button
               variant="contained"
               onClick={step}
               fullWidth={true}
@@ -266,7 +284,7 @@ export function Arena(props: { back: () => void }) {
               startIcon={<DirectionsWalkIcon />}
             >
               Walk
-            </Button>
+            </Button> */}
           </div>
           <div className={styles.form}>
             <Button
@@ -324,13 +342,16 @@ export function Arena(props: { back: () => void }) {
           </div>
         </div>
 
-        <svg
-          className={styles.map}
-          viewBox="0 0 100 100"
-          dangerouslySetInnerHTML={{
-            __html: renderSvg(game, showGoal).outerHTML,
-          }}
-        />
+        <div ref={divRef} className={styles.mapdiv}>
+          <svg
+            onClick={handleClick}
+            className={styles.map}
+            viewBox="0 0 100 100"
+            dangerouslySetInnerHTML={{
+              __html: renderSvg(game, showGoal).outerHTML,
+            }}
+          />
+        </div>
       </div>
     </div>
   );
